@@ -1,0 +1,18 @@
+<h2>Search for local weather</h2>
+
+<%= form_with(url: search_path, method: 'get', local: true) do %>
+  <%= label_tag(:location, 'Enter location Name:') %>
+  <%= text_field_tag(:location) %>
+  <%= submit_tag('Search') %>
+<% end %>
+<% if @jsonresp['cod'] === 200 %>
+  <div>
+  <p><%= "#{params['location'].capitalize}'s current temperature: "  %></p>
+     <%= @jsonresp['main']['temp'] %>
+  </div>
+  <% else %>
+    <div>
+      <p>Unable to find weather for <%= "#{params['location']}" %></p>
+    </div>
+<% end %>
+ 
